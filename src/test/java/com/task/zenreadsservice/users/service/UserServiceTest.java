@@ -25,7 +25,6 @@ import static org.mockito.BDDMockito.given;
 public class UserServiceTest {
 
     private final int ZERO = 0;
-    private final int NUMBER_OF_MIN_GENRE_PREFERENCE = 4;
 
     private final static Genre GENRE = Genre
             .builder()
