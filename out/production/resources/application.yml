@@ -1,0 +1,28 @@
+# Server configuration
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 2048
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookdb
+    username: root
+    password: pass
+    driver: org.postgresql.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+      enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    open-in-view: true
