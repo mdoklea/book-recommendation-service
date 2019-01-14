@@ -11,9 +11,4 @@ public class BookExcelParseException extends RuntimeException {
         super(message, cause);
         this.responseMessageKey = responseMessageKey;
     }
-
-    public BookExcelParseException(final String message, final String responseMessageKey) {
-        super(message);
-        this.responseMessageKey = responseMessageKey;
-    }
 }

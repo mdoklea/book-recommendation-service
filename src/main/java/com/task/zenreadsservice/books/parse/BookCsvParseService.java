@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class BookCsvParseService {
 
+    private static final int NUMBER_OF_BOOK_COLUMNS = 7;
+
     public List<Book>  importBooksFromCsvFile(MultipartFile file) {
 
         BufferedReader bufferedReader;
@@ -38,12 +40,10 @@ public class BookCsvParseService {
         if(!results.isEmpty()){
 
             results.forEach(line -> {
-                if (!line.contains("\\\"")) {
                     String[] items = line.split(",");
-                    if (items.length == 7) {
+                    if (items.length == NUMBER_OF_BOOK_COLUMNS) {
                         books.add(buildBook(items));
                     }
-                }
             });
         }
 
@@ -66,7 +66,7 @@ public class BookCsvParseService {
         if(item.isEmpty()){
             throw new EmptyCellException("Could not create book", label + " Check your file again please.");
         }
-        return item;
+        return item.trim();
     }
 
     private Genre checkGenre(String item) {
@@ -75,7 +75,7 @@ public class BookCsvParseService {
             item = "Other";
         }
         return Genre.builder()
-                .category(item)
+                .category(item.trim())
                 .build();
 
     }

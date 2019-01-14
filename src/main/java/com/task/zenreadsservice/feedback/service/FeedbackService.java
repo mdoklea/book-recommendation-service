@@ -31,6 +31,7 @@ public class FeedbackService {
     }
 
     public Feedback save(final Feedback feedback){
+
         if(userService.findUserById(feedback.getUser().getId()).isPresent() &&
                 bookService.findBookById(feedback.getBook().getId()).isPresent()){
 
@@ -39,6 +40,7 @@ public class FeedbackService {
                     bookService.findBookById(feedback.getBook().getId()).get(),
                     feedback.getRate()));
         }
+
         return null;
     }
 

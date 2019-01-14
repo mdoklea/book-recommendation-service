@@ -30,18 +30,6 @@ public class BookController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<List<Book>> upload(MultipartFile file) {
-
-        if (file == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        val results = bookService.importBooksFromFile(file);
-
-        return ResponseEntity.ok(bookService.saveParsedBooks(results));
-    }
-
-    @PostMapping("/upload/csv")
     public ResponseEntity<List<Book>> uploadCSV(@RequestParam("file") MultipartFile file) {
 
         if (file == null) {

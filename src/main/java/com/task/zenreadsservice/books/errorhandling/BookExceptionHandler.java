@@ -17,6 +17,6 @@ public class BookExceptionHandler {
     @ExceptionHandler(value = {EmptyCellException.class})
     public ResponseEntity<Object> handleEmptyCell(final EmptyCellException e) {
         return ResponseEntity.badRequest()
-                .body(String.format(e.getResponseMessageKey(), e.getRow()));
+                .body(String.format(e.getResponseMessageKey()));
     }
 }
