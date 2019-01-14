@@ -7,28 +7,33 @@ Requirements:
 * The code should be tested as appropriated.
 
 # Prerequisites
-* JDK: `8` or `11`
-* Spring Boot:  2.1.1`
+
+* Install Java JDK 8
+* Spring Boot:  `2.1.1.RELEASE`
 * Gradle: `https\://services.gradle.org/distributions/gradle-4.10.2-bin.zip`
 * lombok
 
+In more details the dependencies are in file `build.gradle`
+
+# Steps to build the service
+
+1. Package application to an executable archive (jar or war file) by building it using the build command:
+   `./gradlew build`
+ 
+# Steps to run the application
+
+1. After you have build the application then run it by command:
+   `./gradlew bootRun`
+   
+2. Or just run it from an IDE.
+
+# Test Application & Endpoints
+
+User API development environment for testing the application like [Postman](https://www.getpostman.com/)
+
+1. After the application has run successfully, the very first step is to upload the books from the csv files.
+In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there some .csv files, both for importing data and for testing cases.
 
 
 
 
-
-# Steps to run the service
-
-1. Running from an IDE.
-* Download folder with book csv files: `https://github.com/mdoklea/book-recommendation-service/tree/master/files`
-* Running from an IDE.
-  
-  
-* You can bring everything down, removing the containers entirely, with the down command.
-`docker-compose down`
-
-
-#  Tech/framework used
-# Installation
-
-# Tests
