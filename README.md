@@ -37,5 +37,35 @@ So, you should see now that sql tables are already created:
 
 Use API development environment like [Postman](https://www.getpostman.com/) for testing the application.
 
-1. The very first step is to upload the books from the csv files.
-In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there some .csv files, both for importing data and for testing cases.
+1. The very first step is to upload the books from the csv files. Use endpoint:
+```
+http://localhost:8080/api/books/upload
+```
+User  `form-data`, and choose file from your folder as in the image below.
+ ![Upload Csv File](/images/upload.png/)
+  
+In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there are .csv files, both for importing data and testing cases.
+
+By uploading/parsing the book files, whenever there is a new genre, I save it in db. Get saved books with endpoint: 
+```
+http://localhost:8080/api/books
+```
+
+ ![Get Books](/images/books.png/)
+ 
+Json view of a book is like this: 
+ 
+ ```
+ {
+        "id": "3b8b3688-dbb4-45c3-85a1-e53876dfcd63",
+        "isbn": "1400321077",
+        "fileName": "1400321077.jpg",
+        "imageUrlPath": "http://ecx.images-amazon.com/images/I/51rokQ30-lL.jpg",
+        "author": "Catherine Claire Larson",
+        "title": "Waiting in Wonder: Growing in Faith While You're Expecting",
+        "genre": {
+            "id": "5e1e8333-ec91-4ffe-85d2-388a6fefc43b",
+            "category": "Parenting & Relationships"
+        }
+    }
+ ```
