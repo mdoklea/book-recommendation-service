@@ -30,14 +30,15 @@ public class BookController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<List<Book>> uploadCSV(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Object> uploadCSV(@RequestParam("file") MultipartFile file) {
 
         if (file == null) {
             return ResponseEntity.badRequest().build();
         }
         val results = bookCsvParseService.importBooksFromCsvFile(file);
+        val books = bookService.saveParsedBooks(results);
 
-        return ResponseEntity.ok(bookService.saveParsedBooks(results));
+        return ResponseEntity.ok("Number of books saved: " + books.size());
     }
 }
 
