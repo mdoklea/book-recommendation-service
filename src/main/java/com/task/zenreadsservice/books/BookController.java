@@ -1,14 +1,12 @@
 package com.task.zenreadsservice.books;
 
 import com.task.zenreadsservice.books.model.Book;
+import com.task.zenreadsservice.books.parse.BookCsvParseService;
 import com.task.zenreadsservice.books.service.BookService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -18,10 +16,12 @@ import java.util.List;
 public class BookController {
 
     private final BookService bookService;
+    private final BookCsvParseService bookCsvParseService;
 
     @Autowired
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookCsvParseService bookCsvParseService) {
         this.bookService = bookService;
+        this.bookCsvParseService = bookCsvParseService;
     }
 
     @GetMapping
@@ -35,10 +35,21 @@ public class BookController {
         if (file == null) {
             return ResponseEntity.badRequest().build();
         }
+
         val results = bookService.importBooksFromFile(file);
 
         return ResponseEntity.ok(bookService.saveParsedBooks(results));
     }
 
+    @PostMapping("/upload/csv")
+    public ResponseEntity<List<Book>> uploadCSV(@RequestParam("file") MultipartFile file) {
+
+        if (file == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        val results = bookCsvParseService.importBooksFromCsvFile(file);
+
+        return ResponseEntity.ok(bookService.saveParsedBooks(results));
+    }
 }
 
