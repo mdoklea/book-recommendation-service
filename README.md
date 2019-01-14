@@ -54,12 +54,12 @@ Requirements:
 
 In more details the dependencies are in file `build.gradle`
 
-# Steps to build the service
+# Build the service
 
 1. Package application to an executable archive (jar or war file) by building it using the build command:
    `./gradlew build`
  
-# Steps to run the application
+# Run the application
 
 1. After you have build the application then run it by command:
    `./gradlew bootRun`
@@ -69,30 +69,34 @@ In more details the dependencies are in file `build.gradle`
  After the application has run successfully, you should be able to have a look again in db admin page `http://localhost:8090`, with schema updated.
  ![Migraftion Files](/images/img1.png/)
  
-So, you should see now that sql tables are already created:
- ![SQL Tables](/images/img2.png/)
+So, you should see also sql tables that are already created.
 
 # Test Application & Endpoints
 
 Use API development environment like [Postman](https://www.getpostman.com/) for testing the application.
 
-1. The very first step is to upload the books from the csv files. Use endpoint:
+__STEP_1__. Upload Book Data
+
+The very first step is to upload the books from the csv files, using endpoint:
 ```
+POST METHOD:
 http://localhost:8080/api/books/upload
 ```
 User  `form-data`, and choose file from your folder as in the image below.
  ![Upload Csv File](/images/upload.png/)
-  
-In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there are .csv files, both for importing data and testing cases.
+ 
+In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there are .csv files, both for uploading data and testing cases.
 
-By uploading/parsing the book files, whenever there is a new genre, I save it in db. Get saved books with endpoint: 
+By uploading/parsing the book files, whenever there is a new genre, I save it in db. 
+GET saved books with endpoint: 
 ```
+GET METHOD:   
 http://localhost:8080/api/books
 ```
 
  ![Get Books](/images/books.png/)
  
-Json view of a book is like this: 
+Json view example of a book is like this: 
  
  ```
  {
@@ -108,3 +112,67 @@ Json view of a book is like this:
         }
     }
  ```
+ 
+ GET saved genres with endpoint: 
+ 
+ ```
+ GET METHOD:   
+ http://localhost:8080/api/genres
+ ```
+ 
+ __STEP_2__: Save New User
+ 
+  ```
+POST METHOD:   
+http://localhost:8080/api/users/register
+  ```
+Body content example like the below (keep in mind genre's id should match those in db):
+
+  ```
+  {
+          "username": "john_snow",
+          "firstName": "John",
+          "lastName": "Snow",
+          "genrePreferences": [
+              {
+                  "genre":   {
+                      "id": "73224e1c-cccc-40a5-84e6-ba725ce519de",
+                      "category": "Science Fiction & Fantasy"
+                  }
+              },
+              {
+                  "genre": {
+                      "id": "5f8a77b3-cb4c-46a8-9a52-de2ddc6d9247",
+                      "category": "Business & Money"
+                  }
+              },
+              {
+              	 "genre": {
+                      "id": "82ce6c35-f7a7-429d-8d43-7e6ded4f44e8",
+                      "category": "Law"
+                  }
+              },
+              
+               {
+              	"genre": {
+                      "id": "e89d51e4-c1af-410d-b267-5dd10845cab5",
+                      "category": "Politics & Social Sciences"
+                  }
+              } ,
+              {
+              	"genre": {
+                      "id": "5e1e8333-ec91-4ffe-85d2-388a6fefc43b",
+                      "category": "Parenting & Relationships"
+                  }
+              }
+              
+          ]
+      }
+  ```
+  
+  Acceptance criteria to register new user:
+  
+  * `username` not existent
+  * `genrePreferences` should contain at least four genres. Otherwise bad request message is shown.
+
+
