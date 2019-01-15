@@ -43,4 +43,14 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUser(user));
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<Object> updateUser (@RequestBody final User user) {
+
+        if (user.getGenrePreferences().isEmpty() ||
+                user.getGenrePreferences().size() < MIN_NUMBER_OF_GENRE_PREFERENCES ){
+            return ResponseEntity.badRequest().body("Please select at least four genre preferences!");
+        }
+
+        return ResponseEntity.ok(userService.saveUser(user));
+    }
 }
