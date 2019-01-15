@@ -169,7 +169,7 @@ http://localhost:8080/api/recommendations/proposed-books/john_snow
 http://localhost:8080/api/feedback
    ```
    
- And body content of post method can be as the below example. NOTE: user & book should exist in db.
+Body content of post method can be as the below example. NOTE: user & book should exist in db.
   ```
 {
 	"user": {
@@ -192,13 +192,21 @@ http://localhost:8080/api/feedback
     },
     "rate": "DISLIKE"
 }
+```
 
- ```
+Save a list of feedback.
+
+```
+POST METHOD:   
+http://localhost:8080/api/feedback/add/all
+```
+ 
 Search feedback by username:
-   ```
+
+```
  Get METHOD:   
 http://localhost:8080/api/feedback/john_snow
-   ```
+ ```
    
 Search feedback by username & rate:
    ```
