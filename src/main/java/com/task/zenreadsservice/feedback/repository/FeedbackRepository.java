@@ -34,4 +34,5 @@ public interface FeedbackRepository extends JpaRepository<Feedback, UUID> {
     List<Feedback> findTopBooksRatedByOtherUsers(@Param("rating") Rating rating,
                                                  @Param("user") User user);
 
+
 }

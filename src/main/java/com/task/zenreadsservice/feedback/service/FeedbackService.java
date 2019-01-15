@@ -53,6 +53,7 @@ public class FeedbackService {
 
         return new ArrayList<>();
     }
+
     public List<Feedback> findAllByUsernameAndRate(final String username, final String rating){
 
         if(userService.findUserByUsername(username).isPresent() && Rating.valueOf(rating) != null){
