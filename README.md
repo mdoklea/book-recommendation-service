@@ -69,7 +69,7 @@ In more details the dependencies are in file `build.gradle`
  After the application has run successfully, you should be able to have a look again in db admin page `http://localhost:8090`, with schema updated.
  ![Migraftion Files](/images/img1.png/)
  
-So, you should see also sql tables that are already created.
+So, you should also see sql tables that are already created.
 
 # Test Application & Endpoints
 
@@ -88,7 +88,7 @@ User  `form-data`, and choose file from your folder as in the image below.
 In folder `https://github.com/mdoklea/book-recommendation-service/tree/master/files` there are .csv files, both for uploading data and testing cases.
 
 By uploading/parsing the book files, whenever there is a new genre, I save it in db. 
-GET saved books with endpoint: 
+Find saved books with endpoint: 
 ```
 GET METHOD:   
 http://localhost:8080/api/books
@@ -112,21 +112,20 @@ Json view example of a book is like this:
         }
     }
  ```
- 
- GET saved genres with endpoint: 
+  __STEP_2__: Find saved genres with endpoint: 
  
  ```
  GET METHOD:   
  http://localhost:8080/api/genres
  ```
  
- __STEP_2__: Save New User
+ __STEP_3__: Save New User
  
   ```
 POST METHOD:   
 http://localhost:8080/api/users/register
   ```
-Body content example like the below (keep in mind genre's id should match those in db):
+Body content example like the one below (keep in mind genre's id should match those in db):
 
   ```
   {
@@ -172,7 +171,13 @@ Body content example like the below (keep in mind genre's id should match those 
   
   Acceptance criteria to register new user:
   
-  * `username` not existent
+  * `username` not existent.
   * `genrePreferences` should contain at least four genres. Otherwise bad request message is shown.
 
+You can update existent user genre preferences with the same way as save, with endpoint.
+  ```
+POST METHOD:   
+http://localhost:8080/api/users/update
+  ```
 
+ __STEP_4__: Save New Feedback
