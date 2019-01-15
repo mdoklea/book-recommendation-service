@@ -36,6 +36,7 @@ So, you should also see sql tables that are already created.
 
 Use API development environment like [Postman](https://www.getpostman.com/) for testing the application.
 
+
 __STEP_1__. `"/api/books"`
 
 The very first step is to upload the books from the csv files, using endpoint:
@@ -73,6 +74,8 @@ Json view example of a book is like this:
         }
     }
  ```
+ 
+ 
   __STEP_2__: `"/api/genres"` 
   
   
@@ -82,6 +85,7 @@ Json view example of a book is like this:
  GET METHOD:   
  http://localhost:8080/api/genres
  ```
+ 
  
  __STEP_3__: `"/api/users"`
  
@@ -146,6 +150,7 @@ You can update existent user genre preferences with the same way as save, with e
 POST METHOD:   
 http://localhost:8080/api/users/update
   ```
+
 
  __STEP_4__: `"/api/recommendations"`
  
