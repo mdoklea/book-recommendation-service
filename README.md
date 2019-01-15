@@ -149,8 +149,17 @@ http://localhost:8080/api/users/update
 
  __STEP_4__: `"/api/recommendations"`
  
+  Find books for recommendation that are relevant to user genre preferences. It should return 20 books.
+ ```
+ GET METHOD:   
+http://localhost:8080/api/recommendations/proposed-books/john_snow
+ ```
  
- 
+ Find books for recommendation that are rated from other users. It should return 5 books.
+```
+ GET METHOD:   
+ http://localhost:8080/api/recommendations/proposed-books/LIKE/exclude/john_snow
+```
  
  
  __STEP_5__: `"/api/feedback"`
