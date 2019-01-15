@@ -35,7 +35,7 @@ public class BookController {
         if (file == null) {
             return ResponseEntity.badRequest().build();
         }
-        val results = bookCsvParseService.importBooksFromCsvFile(file);
+        val results = bookCsvParseService.parseBooksFromCsvFile(file);
         val books = bookService.saveParsedBooks(results);
 
         return ResponseEntity.ok("Number of books saved: " + books.size());

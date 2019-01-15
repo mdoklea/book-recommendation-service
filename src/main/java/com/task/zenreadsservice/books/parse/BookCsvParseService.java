@@ -15,7 +15,7 @@ public class BookCsvParseService {
 
     private static final int NUMBER_OF_BOOK_COLUMNS = 7;
 
-    public List<Book>  importBooksFromCsvFile(MultipartFile file) {
+    public List<Book> parseBooksFromCsvFile(MultipartFile file) {
 
         BufferedReader bufferedReader;
         List<String> results;
