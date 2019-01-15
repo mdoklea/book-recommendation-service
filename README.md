@@ -201,12 +201,12 @@ http://localhost:8080/api/feedback
  ```
 Search feedback by username:
    ```
- Get METHOD:   
+ GET METHOD:   
 http://localhost:8080/api/feedback/john_snow
    ```
    
 Search feedback by username & rate:
    ```
- Get METHOD:   
+ GET METHOD:   
 http://localhost:8080/api/feedback/john_snow/LIKE
    ```
