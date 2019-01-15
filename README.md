@@ -75,7 +75,7 @@ So, you should also see sql tables that are already created.
 
 Use API development environment like [Postman](https://www.getpostman.com/) for testing the application.
 
-__STEP_1__. Upload Book Data
+__STEP_1__. `"/api/books"`
 
 The very first step is to upload the books from the csv files, using endpoint:
 ```
@@ -112,19 +112,25 @@ Json view example of a book is like this:
         }
     }
  ```
-  __STEP_2__: Find saved genres with endpoint: 
+  __STEP_2__: `"/api/genres"` 
+  
+  
+ Find genres saved in db.
  
  ```
  GET METHOD:   
  http://localhost:8080/api/genres
  ```
  
- __STEP_3__: Save New User
+ __STEP_3__: `"/api/users"`
+ 
+ Save New User
  
   ```
 POST METHOD:   
 http://localhost:8080/api/users/register
   ```
+  
 Body content example like the one below (keep in mind genre's id should match those in db):
 
   ```
@@ -180,4 +186,52 @@ POST METHOD:
 http://localhost:8080/api/users/update
   ```
 
- __STEP_4__: Save New Feedback
+ __STEP_4__: `"/api/recommendations"`
+ 
+ 
+ 
+ 
+ 
+ __STEP_5__: `"/api/feedback"`
+ 
+   ```
+ POST METHOD:   
+http://localhost:8080/api/feedback
+   ```
+   
+ And body content of post method can be as the below example. NOTE: user & book should exist in db.
+  ```
+{
+	"user": {
+            "id": "9bde0147-4d32-479b-bc11-e5e065f6326f",
+            "username": "john_snow",
+            "firstName": "John",
+            "lastName": "Snow"
+        },
+   "book": {
+            "id": "830da977-c29a-43b3-a1c9-d1ce4f7b6d20",
+        	"isbn": "881504645",
+        	"fileName": "0881504645.jpg",
+        	"imageUrlPath": "http://ecx.images-amazon.com/images/I/515kgTKZCuL.jpg",
+        	"author": "Bruce Bolnick",
+        	"title": "Waterfalls of the White Mountains: 30 Hikes to 100 Waterfalls",
+        	"genre": {
+            	"id": "9cd0119e-4e4e-4212-a36a-e43054c7a5ef",
+            	"category": "Science & Math"
+        	}
+    },
+    "rate": "DISLIKE"
+}
+
+ ```
+Search feedback by username endpoint:
+   ```
+ Get METHOD:   
+http://localhost:8080/api/feedback/john_snow
+   ```
+   
+Search feedback by username & rate endpoint:
+   ```
+ Get METHOD:   
+http://localhost:8080/api/feedback/john_snow/LIKE
+   ```
