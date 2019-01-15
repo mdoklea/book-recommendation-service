@@ -23,20 +23,20 @@ public class RecommendationController {
         this.recommendationService = recommendationService;
     }
 
-    @GetMapping("/new-books/{username}")
+    @GetMapping("/proposed-books/{username}")
     public ResponseEntity<List<Book>> getBooksByUserGenrePreferences(@PathVariable String username){
         return  ResponseEntity.ok(recommendationService
                 .proposedBooksForFeedbackBasedOnUserGenrePreferences(username));
     }
 
-    @GetMapping("/top-books-by/{rating}/exclude/{username}")
+    @GetMapping("/proposed-books/{rating}/exclude/{username}")
     public ResponseEntity<List<Book>> getBooksBasedOnOtherUsersRating (@PathVariable String rating,
                                                                        @PathVariable String username){
         return  ResponseEntity.ok(recommendationService
                 .proposedBooksForFeedbackBasedOnOtherUserRates(username, rating));
     }
 
-    @GetMapping("/top-books-by/{rating}")
+    @GetMapping("/top-books/{rating}")
     public ResponseEntity<List<Book>> topFiveBooksByRate (@PathVariable String rating){
         return  ResponseEntity.ok(recommendationService
                 .topFiveBooksByRate(Rating.valueOf(rating)));
