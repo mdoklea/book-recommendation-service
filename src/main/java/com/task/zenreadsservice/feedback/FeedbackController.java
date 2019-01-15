@@ -45,5 +45,9 @@ public class FeedbackController {
        return  ResponseEntity.ok(feedbackService.save(feedback));
     }
 
+    @PostMapping("/add/all")
+    public ResponseEntity<List<Feedback>> saveFeedbackAll(@RequestBody final List<Feedback> feedback){
 
+        return  ResponseEntity.ok(feedbackService.saveAll(feedback));
+    }
 }

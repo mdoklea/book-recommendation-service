@@ -57,8 +57,8 @@ public class RecommendationService {
 
         val user = userService.findUserByUsername(username);
 
-        if( !feedbackRepository.findTopBooksRatedByOtherUsers(Rating.LIKE, user.get()).isEmpty()){
-            val bookIds = feedbackRepository.findTopBooksRatedByOtherUsers(Rating.LIKE, user.get()).toArray();
+        if( !feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user.get()).isEmpty()){
+            val bookIds = feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user.get()).toArray();
 
             return updateSetOfBookIdsToBookSet(bookIds)
                     .stream()

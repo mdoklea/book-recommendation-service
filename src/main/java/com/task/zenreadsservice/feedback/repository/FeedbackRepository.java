@@ -31,8 +31,8 @@ public interface FeedbackRepository extends JpaRepository<Feedback, UUID> {
             "WHERE f2.rate =:rating and NOT ( f2.user =:user) " +
             "GROUP BY  f2.book.id " +
             "ORDER BY COUNT(f2.book.id) DESC")
-    List<Feedback> findTopBooksRatedByOtherUsers(@Param("rating") Rating rating,
-                                                 @Param("user") User user);
+    List<Feedback> findTopBooksRatedExcludeUser(@Param("rating") Rating rating,
+                                                @Param("user") User user);
 
 
 }

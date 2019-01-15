@@ -5,6 +5,7 @@ import com.task.zenreadsservice.feedback.model.Feedback;
 import com.task.zenreadsservice.feedback.model.Rating;
 import com.task.zenreadsservice.feedback.repository.FeedbackRepository;
 import com.task.zenreadsservice.users.service.UserService;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,13 @@ public class FeedbackService {
         return feedbackRepository.findAll();
     }
 
+    public List<Feedback> saveAll(final List<Feedback> feedback) {
+
+        feedback.forEach(this::save);
+
+        return findAllByUsername(feedback.get(0).getUser().getUsername());
+
+    }
     public Feedback save(final Feedback feedback){
 
         if(userService.findUserById(feedback.getUser().getId()).isPresent() &&
