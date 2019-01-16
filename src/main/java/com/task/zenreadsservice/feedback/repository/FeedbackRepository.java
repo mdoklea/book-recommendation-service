@@ -1,5 +1,6 @@
 package com.task.zenreadsservice.feedback.repository;
 
+import com.task.zenreadsservice.books.model.Book;
 import com.task.zenreadsservice.feedback.model.Feedback;
 import com.task.zenreadsservice.feedback.model.Rating;
 import com.task.zenreadsservice.users.model.User;
@@ -9,10 +10,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface FeedbackRepository extends JpaRepository<Feedback, UUID> {
+
+    Optional<Feedback> findByUserAndBook(final User user, final Book book);
 
     List<Feedback> findAllByUserAndRate(User user, Rating rate);
     List<Feedback> findAllByUser(User user);

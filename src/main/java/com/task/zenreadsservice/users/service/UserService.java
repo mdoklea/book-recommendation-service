@@ -7,6 +7,7 @@ import com.task.zenreadsservice.users.repository.UserRepository;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -27,7 +28,6 @@ public class UserService {
             val userFromDb = findUserByUsername(user.getUsername());
             userFromDb.get().getGenrePreferences().clear();
             userFromDb.get().getGenrePreferences().addAll(updateGenrePreferences(userFromDb.get(), user));
-            userFromDb.get().getFeedback().addAll(updateFeedback(userFromDb.get(), user));
 
             return  userRepository.saveAndFlush(userFromDb.get());
         }
@@ -44,10 +44,6 @@ public class UserService {
         updateUserFromDb
                 .getGenrePreferences()
                 .addAll(updateGenrePreferences(updateUserFromDb, user));
-
-        updateUserFromDb
-                .getFeedback()
-                .addAll(updateFeedback(updateUserFromDb, user));
 
         return userRepository.save(updateUserFromDb);
 

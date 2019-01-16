@@ -1,76 +1,60 @@
 package com.task.zenreadsservice.feedback.service;
 
-import com.task.zenreadsservice.books.service.BookService;
+import com.task.zenreadsservice.books.model.Book;
 import com.task.zenreadsservice.feedback.model.Feedback;
 import com.task.zenreadsservice.feedback.model.Rating;
 import com.task.zenreadsservice.feedback.repository.FeedbackRepository;
-import com.task.zenreadsservice.users.service.UserService;
+import com.task.zenreadsservice.users.model.User;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class FeedbackService {
     private final FeedbackRepository feedbackRepository;
-    private final UserService userService;
-    private final BookService bookService;
 
     @Autowired
-    public FeedbackService(FeedbackRepository feedbackRepository,
-                           UserService userService,
-                           BookService bookService) {
+    public FeedbackService(FeedbackRepository feedbackRepository) {
         this.feedbackRepository = feedbackRepository;
-        this.userService = userService;
-        this.bookService = bookService;
     }
 
     public List<Feedback> findAll(){
         return feedbackRepository.findAll();
     }
 
-    public List<Feedback> saveAll(final List<Feedback> feedback) {
+    public long saveAll(final List<Feedback> feedback) {
 
-        feedback.forEach(this::save);
+        val savedFeedback = feedback.stream().map(feedback1 -> {
+            Feedback feedback2 = save(feedback1.getUser(), feedback1.getBook(), feedback1.getRate());
+            return  feedback2;
+        });
 
-        return findAllByUsername(feedback.get(0).getUser().getUsername());
 
+        return savedFeedback.count();
     }
-    public Feedback save(final Feedback feedback){
-
-        if(userService.findUserById(feedback.getUser().getId()).isPresent() &&
-                bookService.findBookById(feedback.getBook().getId()).isPresent()){
-
-            return feedbackRepository.save(new Feedback(
-                    userService.findUserById(feedback.getUser().getId()).get(),
-                    bookService.findBookById(feedback.getBook().getId()).get(),
-                    feedback.getRate()));
-        }
-
-        return null;
+    public Feedback save(final User user, final Book book, final Rating rating){
+        return feedbackRepository.save(updateFeedback(user, book, rating));
     }
 
-    public List<Feedback> findAllByUsername(final String username){
-
-        if(userService.findUserByUsername(username).isPresent()){
-            return feedbackRepository.findAllByUser(
-                    userService.findUserByUsername(username).get());
-        }
-
-        return new ArrayList<>();
+    public List<Feedback> findAllByUser(final User user){
+        return feedbackRepository.findAllByUser(user);
     }
 
-    public List<Feedback> findAllByUsernameAndRate(final String username, final String rating){
+    public List<Feedback> findAllByUserAndRate(final User user, final Rating rating){
+        return feedbackRepository.findAllByUserAndRate(user, rating);
+    }
 
-        if(userService.findUserByUsername(username).isPresent() && Rating.valueOf(rating) != null){
-            return feedbackRepository.findAllByUserAndRate(
-                    userService.findUserByUsername(username).get(),
-                    Rating.valueOf(rating));
+    private Feedback updateFeedback(final User user, final Book book, final Rating rating){
+
+        Feedback feedback =  new Feedback(user, book, rating);
+        if(feedbackRepository.findByUserAndBook(user,  book).isPresent()){
+            feedback = feedbackRepository.findByUserAndBook(user,  book).get();
+            feedback.setRate(rating);
         }
 
-        return new ArrayList<>();
+        return feedback;
     }
 
 }

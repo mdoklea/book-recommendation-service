@@ -24,7 +24,6 @@ public class RecommendationService {
     private final UserService userService;
     private final BookService bookService;
 
-
     @Autowired
     public RecommendationService(FeedbackRepository feedbackRepository,
                                  UserService userService,
@@ -34,31 +33,26 @@ public class RecommendationService {
         this.bookService = bookService;
     }
 
-    public List<Book> proposedBooksForFeedbackBasedOnUserGenrePreferences(final String username){
+    public List<Book> proposedBooksForFeedbackBasedOnUserGenrePreferences(final User user){
 
         val books = new ArrayList<Book>();
 
-        val user = userService.findUserByUsername(username);
-
-        if (!user.get().getGenrePreferences().isEmpty()){
-            user.get().getGenrePreferences()
+        user.getGenrePreferences()
                     .stream()
                     .forEach(genrePreference -> {
                         val booksByGenre = bookService.findBooksByGenre(genrePreference.getGenre());
-                        val excludedBooks = excludeBooksByUsersFeedback(user.get(), booksByGenre);
+                        val excludedBooks = excludeBooksByUsersFeedback(user, booksByGenre);
                         books.addAll(selectRandomBooksAndLimitResults(excludedBooks));
                     });
-        }
 
         return books;
+
     }
 
-    public List<Book> proposedBooksForFeedbackBasedOnOtherUserRates(final String username, final String rate){
+    public List<Book> proposedBooksForFeedbackBasedOnOtherUserRates(final User user, final Rating rate){
 
-        val user = userService.findUserByUsername(username);
-
-        if( !feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user.get()).isEmpty()){
-            val bookIds = feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user.get()).toArray();
+        if( !feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user).isEmpty()){
+            val bookIds = feedbackRepository.findTopBooksRatedExcludeUser(Rating.LIKE, user).toArray();
 
             return updateSetOfBookIdsToBookSet(bookIds)
                     .stream()

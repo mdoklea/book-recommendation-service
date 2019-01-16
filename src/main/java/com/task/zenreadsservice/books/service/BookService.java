@@ -85,13 +85,12 @@ public class BookService {
        return books;
     }
 
-    public List<Book> findBooksByGenre(Genre genre) {
+    public List<Book> findBooksByGenre(final Genre genre) {
 
         val books = new ArrayList<Book>();
 
-        if(genreRepository.findGenreByCategory(genre.getCategory()).isPresent()){
-             books.addAll(bookRepository
-                        .findBooksByGenre(genre));
+        if( genre!= null && genreRepository.findGenreByCategory(genre.getCategory()).isPresent()){
+             books.addAll(bookRepository.findBooksByGenre(genre));
         }
 
         return books;
