@@ -36,17 +36,17 @@ So, you should also see sql tables that are already created.
 
    Test classes are named <className>Test. That is for a class `BookCsvParseService` the test would be `BookCsvParseServiceTest`.
    
-   Test methods are named `<methodUnderTest>_<expectedBehavior>_<stateUnderTest>`. 
+   Test methods are named `<methodUnderTest>_<stateUnderTest>_<expectedBehavior>`. 
    Even though refactoring might change the names its still useful to have the method name in there to know immediately what's tested.
    
    Example:
    
-   `parseBooksFromCsvFile_ReturnsCorrectFields_WithValidInput`
+   `parseBooksFromCsvFile_WithValidInput_ReturnsCorrectFields`
    With a complicated integration test it make sense to rather describe a broader behavior, but we'll see on a case by case basis.
    
    Organization:
    
-   I followed the Given-When-Then or Arrange-Act-Assert patterns inspired from BDD. There are three code blocks with up to 4 lines each. Example:
+   I followed the `Given-When-Then` or `Arrange-Act-Assert` patterns inspired from BDD. There are three code blocks with up to 4 lines each. Example:
    * givenUser().authenticated(true).build();
    * val result = service.doAction();
    * assertThat(result.value).isEqualTo(123);
