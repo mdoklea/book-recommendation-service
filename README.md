@@ -6,7 +6,7 @@ Requirements:
 * The list of recommendations should contain exactly 20 entries if possible.
 * The code should be tested as appropriated.
 
-# Prerequisites
+### Prerequisites
 
 * Install Java JDK 8
 * Spring Boot:  `2.1.1.RELEASE`
@@ -15,12 +15,12 @@ Requirements:
 
 In more details the dependencies are in file `build.gradle`
 
-# Build the service
+### Build the service
 
 1. Package application to an executable archive (jar or war file) by building it using the build command:
    `./gradlew build`
  
-# Run the application
+### Run the application
 
 1. After you have build the application then run it by command:
    `./gradlew bootRun`
@@ -32,7 +32,7 @@ In more details the dependencies are in file `build.gradle`
  
 So, you should also see sql tables that are already created. Easy way to set up the SQL connection is via docker file and here is the [link](https://github.com/mdoklea/docker-with-postgresql).
    
- __Automated Tests:__   
+### Automated Tests 
 
    Test classes are named <className>Test. That is for a class `BookCsvParseService` the test would be `BookCsvParseServiceTest`.
    
