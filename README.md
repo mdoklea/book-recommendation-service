@@ -30,7 +30,7 @@ In more details the dependencies are in file `build.gradle`
  After the application has run successfully, you should be able to have a look again in db admin page `http://localhost:8090`, with schema updated.
  ![Migraftion Files](/images/img1.png/)
  
-So, you should also see sql tables that are already created. 
+So, you should also see sql tables that are already created. Easy way to set up the SQL connection is via docker file and here is the [link](https://github.com/mdoklea/docker-with-postgresql).
    
  __Automated Tests:__   
 
