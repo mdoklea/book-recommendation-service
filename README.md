@@ -42,7 +42,7 @@ So, you should also see sql tables that are already created. Easy way to set up 
    Example:
    
    `parseBooksFromCsvFile_WithValidInput_ReturnsCorrectFields`
-   With a complicated integration test it make sense to rather describe a broader behavior, but we'll see on a case by case basis.
+   With a complicated integration test it makes sense to rather describe a broader behavior, but we'll see on a case by case basis.
    
    Organization:
    
