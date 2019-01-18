@@ -46,7 +46,7 @@ So, you should also see sql tables that are already created.
    
    Organization:
    
-   I followed the `Given-When-Then` or `Arrange-Act-Assert` patterns inspired from BDD. There are three code blocks with up to 4 lines each. Example:
+   I followed the `Given-When-Then` or `Arrange-Act-Assert` patterns inspired by BDD. There are three code blocks with up to 4 lines each. Example:
    * givenUser().authenticated(true).build();
    * val result = service.doAction();
    * assertThat(result.value).isEqualTo(123);
